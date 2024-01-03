@@ -1,2 +1,2 @@
-# unnamed-project
-Planning to build a Next.js project and add features as I go
+# chat-application
+Planning to start off small with creating a real-time chat application
