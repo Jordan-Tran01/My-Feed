@@ -1,7 +1,15 @@
-import {SignUp} from '@clerk/nextjs'
+import { SignUp } from '@clerk/nextjs'
 
-const SignUpPage = () => {
-    return <SignUp afterSignUpUrl="/new-user" redirectUrl="/new-user" />
+export default function SignUpPage() {
+  return (
+    <body className="bg-blue-500 flex items-center justify-center">
+    <SignUp
+      path="/sign-up"
+      routing="path"
+      signInUrl="/sign-in"
+      redirectUrl="/new-user"
+      afterSignUpUrl="/new-user"
+    />
+    </body>
+  )
 }
-
-export default SignUpPage
