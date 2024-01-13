@@ -1,13 +1,13 @@
 import { getUserFromClerkID } from "@/utils/auth"
 import { prisma } from "@/utils/db"
-import NewEntryCard from "@/components/NewEntryCard"
-import EntryCard from "@/components/EntryCard"
+import NewFeedCard from "@/components/NewFeedCard"
+import FeedCard from "@/components/FeedCard"
 import Link from 'next/link'
 
 
-const getEntries = async () => {
+const getFeeds = async () => {
     const user = await getUserFromClerkID()
-    const entries = await prisma.feedEntry.findMany({
+    const feeds = await prisma.feedEntry.findMany({
         where: {
             userId: user.id,
         },
@@ -16,21 +16,21 @@ const getEntries = async () => {
         },
     })
 
-    return entries
+    return feeds
 }
 
 const HomePage = async () => {
-    const entries = await getEntries()
+    const feeds = await getFeeds()
 
     return ( 
     <div className="p-6 bg-gray-50"> 
         <h1>Your Discussions</h1>
         <div className="grid grid-cols-3 gap-4 p-5">
-        <NewEntryCard />
-        {entries.map((entry) => (
-          <div key={entry.id}>
-            <Link href={`/journal/${entry.id}`}>
-              <EntryCard entry={entry} />
+        <NewFeedCard />
+        {feeds.map((feed) => (
+          <div key={feed.id}>
+            <Link href={`/journal/${feed.id}`}>
+              <FeedCard feed={feed} />
             </Link>
           </div>
         ))}
