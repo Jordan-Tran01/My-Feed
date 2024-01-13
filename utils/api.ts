@@ -4,15 +4,14 @@ const createURL = (path) => {
 
 export const createEntry = async () => {
     const res = await fetch(
-      new Request(createURL('/api/home'), {
+      new Request(createURL('/api/feed'), {
         method: 'POST',
       })
     )
       
     if (res.ok) {
-      const data = await res.json()
-      return data.data
+      return res.json()
     } else {
-      throw new Error('Something went wrong on API server!')
+      throw new Error("Something went wrong on API server!")
     }
   }
