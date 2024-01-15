@@ -5,7 +5,7 @@ import FeedCard from "@/components/FeedCard"
 import Link from 'next/link'
 
 
-const getFeeds = async () => {
+const getFeeds = async () => { //Function to extract the feeds of the specific user
     const user = await getUserFromClerkID()
     const feeds = await prisma.feedEntry.findMany({
         where: {
@@ -29,7 +29,7 @@ const HomePage = async () => {
         <NewFeedCard />
         {feeds.map((feed) => (
           <div key={feed.id}>
-            <Link href={`/journal/${feed.id}`}>
+            <Link href={`/feed/${feed.id}`}>
               <FeedCard feed={feed} />
             </Link>
           </div>
