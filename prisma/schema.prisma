@@ -35,5 +35,20 @@ model FeedEntry {
 
   content String @db.Text
 
-  @@index([userId])
+  comments Comment[]
+
+  @@unique([userId, id])
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  feedEntryId String
+  feedEntry   FeedEntry @relation(fields: [feedEntryId], references: [id])
+
+  content String @db.Text
+
+  @@unique([feedEntryId, id])
 }

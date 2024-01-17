@@ -4,7 +4,7 @@ const createURL = (path) => {
 
 export const createEntry = async () => {
     const res = await fetch(
-      new Request(createURL('/api/feed'), {
+      new Request(createURL('/api/home'), {
         method: 'POST',
       })
     )
