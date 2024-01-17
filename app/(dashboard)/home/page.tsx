@@ -29,7 +29,7 @@ const HomePage = async () => {
         <NewFeedCard />
         {feeds.map((feed) => (
           <div key={feed.id}>
-            <Link href={`/feed/${feed.id}`}>
+            <Link href={`/home/${feed.id}`}>
               <FeedCard feed={feed} />
             </Link>
           </div>

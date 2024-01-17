@@ -7,7 +7,7 @@ const NewFeedCard = () => {
 
     const handleOnClick = async () => {
       const data = await createEntry()
-      router.push(`/journal/${data.id}`)
+      router.push(`/home/${data.id}`)
     }
 
     return (
