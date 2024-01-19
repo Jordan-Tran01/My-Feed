@@ -18,9 +18,11 @@ const getFeed = async (id) => {
 
 const EditorPage = async ({ params }) => {
     const feed = await getFeed(params.id)
-    return <div>
+    return (
+    <div className='h-full w-full'>
         <Editor feed={feed} />
     </div>
+    )
 }
 
 export default EditorPage
