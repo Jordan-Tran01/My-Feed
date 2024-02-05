@@ -1,18 +1,21 @@
 import { getUserFromClerkID } from "@/utils/auth"
 import { prisma } from "@/utils/db"
 import { NextResponse } from 'next/server'
-import { revalidatePath } from "next/cache"
+import { update } from "@/utils/actions"
 
-export const POST = async () => {
+export const POST = async () => { 
     const user = await getUserFromClerkID()
     const entry = await prisma.feedEntry.create({
         data: {
+            title: "Title",
             userId: user.id,
-            content: 'Write any questions away!',
+            content: 'Write your post...',
         },
     })
 
-    revalidatePath('/home')
+    update(['/home'])
 
     return NextResponse.json({ data: entry })
 }
+
+//Handles the route to creating a new drafted feed

@@ -14,6 +14,7 @@ const NewFeedCard = () => {
         <div
             className="cursor-pointer overflow-hidden rounded-lg bg-white shadow"
             onClick={handleOnClick}>
+                
             <div className="px-4 py-5 sm:p-6 flex items-center justify-center">
                 <span className="text-3xl">Post a new Feed!</span>
             </div>

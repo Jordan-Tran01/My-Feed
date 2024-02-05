@@ -10,7 +10,8 @@ export const createEntry = async () => {
     )
       
     if (res.ok) {
-      return res.json()
+      const data = await res.json()
+      return data.data
     } else {
       throw new Error("Something went wrong on API server!")
     }

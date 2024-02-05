@@ -1,7 +1,29 @@
-const FriendsPage = () => {
-    return (
-        <div>Add and look through what your friends have been asking!</div>
-    )
-}
+'use client'
 
-export default FriendsPage
+import React, { useState } from 'react';
+
+const FriendsPage = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  return (
+    <div>
+      
+      {/* Search bar */}
+      <div className="my-4 flex items-center">
+        <input
+          type="text"
+          placeholder="Search friends..."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="p-2 border border-gray-300 rounded-md"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default FriendsPage;
