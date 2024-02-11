@@ -1,44 +1,33 @@
 'use client'
 
-import { updateFeed, updateTitle } from "@/utils/api"
+import { updateFeed} from "@/utils/api"
 import { useState } from "react"
 import { useAutosave } from "react-autosave"
 
 const Editor = ({ feed }) => {
-    const [value, setValue] = useState(feed.content)
+    const [content, setContent] = useState(feed.content)
     const [title, setTitle] = useState(feed.title)
     const [isLoading, setIsLoading] = useState(false)
 
-    useAutosave({
-        data: value,
-        onSave: async (_value) =>{
-            setIsLoading(true)
-            const updated = await updateFeed(feed.id, _value, title)
-            setIsLoading(false)
-        },
-    })
-
-    useAutosave({
-        data: title,
-        onSave: async (_title) =>{
-            setIsLoading(true)
-            const updated = await updateFeed(feed.id, value, _title)
-            setIsLoading(false)
-        },
-    })
-
+    const handleSave = async () => {
+        setIsLoading(true);
+        await updateFeed(feed.id, content, title);
+        setIsLoading(false);
+      };
+      
     return (
 
         <div className="w-full h-full">
             {isLoading && (<div>...loading</div>)}
             <textarea className="p-8 text-xl outline-none border-black" 
-            value={value} 
-            onChange={(e) => setValue(e.target.value)} 
+            value={content} 
+            onChange={(e) => setContent(e.target.value)} 
             />
             <textarea className="p-8 text-xl outline-none border-black" 
             value={title} 
             onChange={(e) => setTitle(e.target.value)} 
             />
+            <button onClick={handleSave}>Save</button>
             
         </div>
     )
