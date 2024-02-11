@@ -36,6 +36,8 @@ model FeedEntry {
 
   content String @db.Text
 
+  public Boolean @default(false)
+
   comments Comment[]
 
   @@unique([userId, id])

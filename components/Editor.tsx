@@ -1,20 +1,43 @@
 'use client'
 
+import { updateFeed, updateTitle } from "@/utils/api"
 import { useState } from "react"
+import { useAutosave } from "react-autosave"
 
 const Editor = ({ feed }) => {
-    const [titleValue, setTitleValue] = useState(feed.title)
-    const [contentValue, setContentValue] = useState(feed.content)
+    const [value, setValue] = useState(feed.content)
+    const [title, setTitle] = useState(feed.title)
+    const [isLoading, setIsLoading] = useState(false)
+
+    useAutosave({
+        data: value,
+        onSave: async (_value) =>{
+            setIsLoading(true)
+            const updated = await updateFeed(feed.id, _value, title)
+            setIsLoading(false)
+        },
+    })
+
+    useAutosave({
+        data: title,
+        onSave: async (_title) =>{
+            setIsLoading(true)
+            const updated = await updateFeed(feed.id, value, _title)
+            setIsLoading(false)
+        },
+    })
+
     return (
 
         <div className="w-full h-full">
-            <textarea className="w-200 h-20 p-8 text-xl outline-none" 
-            value={contentValue} 
-            onChange={(e) => setContentValue(e.target.value)} 
+            {isLoading && (<div>...loading</div>)}
+            <textarea className="p-8 text-xl outline-none border-black" 
+            value={value} 
+            onChange={(e) => setValue(e.target.value)} 
             />
-            <textarea className="w-200 h-200 p-8 text-xl outline-none" 
-            value={titleValue} 
-            onChange={(e) => setTitleValue(e.target.value)} 
+            <textarea className="p-8 text-xl outline-none border-black" 
+            value={title} 
+            onChange={(e) => setTitle(e.target.value)} 
             />
             
         </div>

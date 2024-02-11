@@ -16,7 +16,7 @@ const NewFeedCard = () => {
             onClick={handleOnClick}>
                 
             <div className="px-4 py-5 sm:p-6 flex items-center justify-center">
-                <span className="text-3xl">Post a new Feed!</span>
+                <span className="text-3xl">Create a Feed!</span>
             </div>
         </div>
     )

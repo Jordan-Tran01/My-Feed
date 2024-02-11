@@ -53,6 +53,7 @@ const HomePage = async () => {
     <div className="p-6 bg-gray-50"> 
         <div className="py-8">{email}</div>
         <NewFeedCard />
+        <h1 className="p-6 font-semibold text-gray-700 text-3xl">Drafted Feeds</h1>
         <div className="grid grid-cols-3 gap-4 p-5">
         {feeds.map((feed) => (
           <div key={feed.id}>
