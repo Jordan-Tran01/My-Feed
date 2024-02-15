@@ -11,3 +11,13 @@ export const getUserFromClerkID = async () => {
   
   return user;
 };
+
+export const getUserbyUserId = async (userId: string) => {
+  const user = await prisma.user.findUniqueOrThrow({
+      where: {
+          id: userId,
+      },
+  });
+  
+  return user;
+};
