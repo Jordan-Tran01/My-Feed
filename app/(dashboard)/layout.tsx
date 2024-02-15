@@ -15,9 +15,9 @@ const DashboardLayout = ({ children }) => {
           <span className="text-3xl">MyFeed</span>
         </div>
         <div>
-          <ul className="px-4">
+          <ul className="px-4 mt-6">
             {links.map((link) => (
-              <li key={link.name} className="text-xl my-4 pl-10 bg-sky-500 rounded-lg">
+              <li key={link.name} className="text-xl my-5 p-2 outline outline-offset-0 border-indigo-600">
                 <Link href={link.href}>{link.name}</Link>
               </li>
             ))}
@@ -26,7 +26,7 @@ const DashboardLayout = ({ children }) => {
       </aside>
       <div className="ml-[200px] h-full w-[calc(100vw-200px)]">
         <header className="h-[60px] border-b border-black/10">
-          <nav className="px-4 h-full">
+          <nav className="px-4 h-full bg-gray-50">
             <div className="flex items-center justify-end h-full">
               <UserButton afterSignOutUrl="/" />
             </div>
