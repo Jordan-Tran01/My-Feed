@@ -2,7 +2,6 @@
 
 import { updateFeed} from "@/utils/api"
 import { useState } from "react"
-import { useAutosave } from "react-autosave"
 
 const Editor = ({ feed }) => {
     const [content, setContent] = useState(feed.content)
@@ -14,7 +13,7 @@ const Editor = ({ feed }) => {
         await updateFeed(feed.id, content, title);
         setIsLoading(false);
       };
-      
+
     return (
 
         <div className="w-full h-full">
