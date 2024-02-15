@@ -26,7 +26,8 @@ const Editor = ({ feed }) => {
             value={title} 
             onChange={(e) => setTitle(e.target.value)} 
             />
-            <button onClick={handleSave}>Save</button>
+            <button onClick={handleSave} className="ml-4 p-4 border-solid border-4 border-black">Save for later</button>
+            <button onClick={handleSave} className="ml-4 p-4 border-solid border-4 border-black">Post!</button>
             
         </div>
     )
