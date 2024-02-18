@@ -4,7 +4,7 @@ const FeedCard = async ({feed}) => {
     const date = new Date(feed.createdAt).toDateString()
     const title = feed.title
     const user = await getUserbyUserId(feed.userId)
-    const posted = feed.public
+    const posted = feed.posted
 
     return (
         <div className="divide-y divide-gray-200 overflow-hidden bg-white shadow border-double border-4 border-black">
