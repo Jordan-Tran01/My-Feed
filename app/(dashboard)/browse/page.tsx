@@ -2,10 +2,10 @@ import { prisma } from "@/utils/db"
 import FeedCard from "@/components/FeedCard"
 import Link from "next/link"
 
-const getPublicFeeds = async () => { //Function to extract the feeds of the specific user
+const getPublicFeeds = async () => { 
     const feeds = await prisma.feedEntry.findMany({
         where: {
-            public: true,
+            posted: true,
         },
         orderBy: {
             createdAt: 'desc',

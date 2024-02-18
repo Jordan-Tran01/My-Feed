@@ -3,7 +3,7 @@ import { prisma } from '@/utils/db'
 import { NextResponse } from "next/server"
 
 export const PATCH = async (request: Request, {params}) => {
-    const {content, title} = await request.json()
+    const {content, title, posted} = await request.json()
 
     const user = await getUserFromClerkID()
     const postedFeed = await prisma.feedEntry.update({
@@ -16,6 +16,7 @@ export const PATCH = async (request: Request, {params}) => {
         data: {
             content,
             title,
+            posted,
         },
     })
 

@@ -37,7 +37,7 @@ model FeedEntry {
 
   content String @db.Text
 
-  public Boolean @default(false)
+  posted Boolean @default(false)
 
   comments Comment[]
 

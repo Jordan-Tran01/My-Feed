@@ -1,6 +1,6 @@
 'use client'
 
-import { updateFeed} from "@/utils/api"
+import { postFeed, updateFeed} from "@/utils/api"
 import { useState } from "react"
 
 const Editor = ({ feed }) => {
@@ -10,7 +10,13 @@ const Editor = ({ feed }) => {
 
     const handleSave = async () => {
         setIsLoading(true);
-        await updateFeed(feed.id, content, title);
+        await updateFeed(feed.id, content, title, false);
+        setIsLoading(false);
+      };
+
+      const handlePost = async () => {
+        setIsLoading(true);
+        await updateFeed(feed.id, content, title, true);
         setIsLoading(false);
       };
 
@@ -33,7 +39,7 @@ const Editor = ({ feed }) => {
             </div>
             <div className="my-10">
             <button onClick={handleSave} className="ml-4 p-4 border-solid border-4 border-black">Save for later</button>
-            <button onClick={handleSave} className="ml-4 p-4 border-solid border-4 border-black">Post!</button>
+            <button onClick={handlePost} className="ml-4 p-4 border-solid border-4 border-black">Post!</button>
             </div>
 
         </div>

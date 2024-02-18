@@ -6,19 +6,24 @@ import FeedCard from "@/components/FeedCard"
 import Link from 'next/link'
 
 
-const getFeeds = async () => { //Function to extract the feeds of the specific user
-    const user = await getUserFromClerkID()
-    const feeds = await prisma.feedEntry.findMany({
-        where: {
-            userId: user.id,
-        },
-        orderBy: {
-            createdAt: 'desc',
-        },
-    })
+const getFeeds = async () => {
+  try {
+      const user = await getUserFromClerkID();
+      const feeds = await prisma.feedEntry.findMany({
+          where: {
+              userId: user.id,
+          },
+          orderBy: {
+              createdAt: 'desc',
+          },
+      });
 
-    return feeds
-}
+      return feeds;
+  } catch (error) {
+      console.error('Error fetching feeds:', error);
+      throw new Error('Failed to fetch feeds');
+  }
+};
 
 const HomePage = async () => {
     const feeds = await getFeeds()
