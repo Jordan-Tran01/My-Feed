@@ -5,8 +5,27 @@ import NewFeedCard from "@/components/NewFeedCard"
 import FeedCard from "@/components/FeedCard"
 import Link from 'next/link'
 
+const getPostedFeeds = async () => {
+  try {
+      const user = await getUserFromClerkID();
+      const feeds = await prisma.feedEntry.findMany({
+          where: {
+              userId: user.id,
+              posted: true,
+          },
+          orderBy: {
+              createdAt: 'desc',
+          },
+      });
 
-const getFeeds = async () => {
+      return feeds;
+  } catch (error) {
+      console.error('Error fetching feeds:', error);
+      throw new Error('Failed to fetch feeds');
+  }
+};
+
+const getDraftedFeeds = async () => {
   try {
       const user = await getUserFromClerkID();
       const feeds = await prisma.feedEntry.findMany({
@@ -27,7 +46,8 @@ const getFeeds = async () => {
 };
 
 const HomePage = async () => {
-    const feeds = await getFeeds()
+    const draftedFeeds = await getDraftedFeeds()
+    const postedFeeds = await getPostedFeeds()
     const email = await getEmail()
     const user = await getUserFromClerkID()
     const username = user.username;
@@ -37,7 +57,18 @@ const HomePage = async () => {
         <NewFeedCard />
         <h1 className="p-6 font-semibold text-gray-700 text-3xl">{username}'s Drafted Feeds</h1>
         <div className="grid grid-cols-3 gap-4 p-5">
-        {feeds.map((feed) => (
+        {draftedFeeds.map((feed) => (
+          <div key={feed.id}>
+            <Link href={`/home/${feed.id}`}>
+              <FeedCard feed={feed} />
+            </Link>
+        </div>
+        ))}
+      </div>
+
+      <h1 className="p-6 font-semibold text-gray-700 text-3xl">{username}'s Posted Feeds</h1>
+        <div className="grid grid-cols-3 gap-4 p-5">
+        {postedFeeds.map((feed) => (
           <div key={feed.id}>
             <Link href={`/home/${feed.id}`}>
               <FeedCard feed={feed} />
