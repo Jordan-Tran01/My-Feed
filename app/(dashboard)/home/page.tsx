@@ -4,6 +4,7 @@ import { getEmail } from "@/utils/email"
 import NewFeedCard from "@/components/NewFeedCard"
 import FeedCard from "@/components/FeedCard"
 import Link from 'next/link'
+import PostedFeedCard from "@/components/PostedFeed"
 
 const getPostedFeeds = async () => {
   try {
@@ -71,7 +72,7 @@ const HomePage = async () => {
         {postedFeeds.map((feed) => (
           <div key={feed.id}>
             <Link href={`/home/${feed.id}`}>
-              <FeedCard feed={feed} />
+              <PostedFeedCard feed={feed} />
             </Link>
         </div>
         ))}

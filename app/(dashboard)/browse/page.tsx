@@ -1,6 +1,6 @@
 import { prisma } from "@/utils/db"
-import FeedCard from "@/components/FeedCard"
 import Link from "next/link"
+import PostedFeedCard from "@/components/PostedFeed"
 
 const getPublicFeeds = async () => { 
     const feeds = await prisma.feedEntry.findMany({
@@ -26,7 +26,7 @@ const BrowsePage = async () => {
         {feeds.map((feed) => (
           <div key={feed.id}>
             <Link href={`/home/${feed.id}`}>
-              <FeedCard feed={feed} />
+              <PostedFeedCard feed={feed} />
             </Link>
         </div>
         ))}
