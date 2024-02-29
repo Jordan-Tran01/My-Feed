@@ -1,13 +1,20 @@
-'use client'
 
+import { prisma } from '@/utils/db';
 import React, { useState } from 'react';
 
-const FriendsPage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+const getUsers = async () => {
+  try {
+    const users = await prisma.user.findMany();
+    return users;
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    throw new Error('Failed to fetch users');
+  }
+}
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
+const FriendsPage = async () => {
+  const users = await getUsers()
+  console.log(users)
 
   return (
     <div>
@@ -17,8 +24,6 @@ const FriendsPage = () => {
         <input
           type="text"
           placeholder="Search friends..."
-          value={searchTerm}
-          onChange={handleSearch}
           className="p-2 border border-gray-300 rounded-md"
         />
       </div>
