@@ -14,7 +14,10 @@ const getUsers = async () => {
 
 const FriendsPage = async () => {
   const users = await getUsers()
-  console.log(users)
+  const allUsernames = [];
+  for (const user of users) {
+    allUsernames.push(user.username);
+  }
 
   return (
     <div>
